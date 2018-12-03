@@ -5,7 +5,7 @@ export interface LogoProps {
 }
 
 interface Segment {
-  className: "clear" | "back" | "fore";
+  className: "back" | "clear" | "fore";
   length: number;
 }
 
@@ -15,8 +15,8 @@ interface Line {
 }
 
 export interface LogoState {
-  lines: Line[];
   isSorted: boolean;
+  lines: Line[];
 }
 
 export class Logo extends React.Component<LogoProps, LogoState> {
@@ -249,8 +249,8 @@ export class Logo extends React.Component<LogoProps, LogoState> {
     }
 
     this.state = {
-      lines: lines,
-      isSorted: !props.isAnimated
+      isSorted: !props.isAnimated,
+      lines: lines
     };
   }
 
@@ -269,9 +269,9 @@ export class Logo extends React.Component<LogoProps, LogoState> {
     return (
       <svg
         className="sci-sortier-documentation-logo"
-        viewBox={`0 0 90 ${totalHeight}`}
         onMouseEnter={this.mouseEnter}
         onMouseLeave={this.mouseLeave}
+        viewBox={`0 0 90 ${totalHeight}`}
       >
         {lines.map((value, index) => {
           return this.renderSegments(value, index);
@@ -303,9 +303,9 @@ export class Logo extends React.Component<LogoProps, LogoState> {
       let newStart = start + segment.length;
       let path = (
         <path
-          key={index}
           className={segment.className}
           d={`M${start + 4} 0 l${segment.length - 4} 0`}
+          key={index}
         />
       );
       start = newStart;
@@ -315,9 +315,9 @@ export class Logo extends React.Component<LogoProps, LogoState> {
     if (start !== 130) {
       paths.push(
         <path
-          key={value.segments.length}
           className={"clear"}
           d={`M${start + 4} 0 l${126} 0`}
+          key={value.segments.length}
         />
       );
     }
@@ -332,8 +332,8 @@ export class Logo extends React.Component<LogoProps, LogoState> {
 
     return (
       <g
-        key={value.index}
         data-number={value.index}
+        key={value.index}
         style={{ transform: transform }}
       >
         {paths}
