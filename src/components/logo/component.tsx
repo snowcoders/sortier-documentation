@@ -269,8 +269,8 @@ export class Logo extends React.Component<LogoProps, LogoState> {
     return (
       <svg
         className="sci-sortier-documentation-logo"
-        onMouseEnter={this.mouseEnter}
         onMouseLeave={this.mouseLeave}
+        onMouseEnter={this.mouseEnter}
         viewBox={`0 0 90 ${totalHeight}`}
       >
         {lines.map((value, index) => {
