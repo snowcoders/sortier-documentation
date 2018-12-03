@@ -1,11 +1,10 @@
 {
-    "*.{css,md}": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.{js,jsx,ts,tsx,json,html}": [
+  "linters": {
+    "**/*.css,js,jsx,ts,tsx,json,html,md}": [
       "prettier --write",
       "sortier",
       "git add"
     ]
-  }
+  },
+  "ignore": ["**/package-lock.json"]
+}
