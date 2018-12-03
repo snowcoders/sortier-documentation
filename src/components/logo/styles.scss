@@ -2,7 +2,7 @@
 
 .sci-sortier-documentation-logo {
   > g {
-    height: 10px;
+    transition: transform 0.5s;
 
     > path {
       stroke-width: 2px;

@@ -16,13 +16,16 @@ interface Line {
 
 export interface LogoState {
   lines: Line[];
+  isSorted: boolean;
 }
 
 export class Logo extends React.Component<LogoProps, LogoState> {
+  private static HEIGHT_PER_LINE: number = 3.5;
+
   constructor(props: LogoProps) {
     super(props);
 
-    let lineLengths: Segment[][] = [
+    let beginningHalfLineLengths: Segment[][] = [
       [
         {
           className: "clear",
@@ -39,6 +42,10 @@ export class Logo extends React.Component<LogoProps, LogoState> {
         {
           className: "back",
           length: 25
+        },
+        {
+          className: "clear",
+          length: 14
         }
       ],
       [
@@ -57,6 +64,10 @@ export class Logo extends React.Component<LogoProps, LogoState> {
         {
           className: "back",
           length: 25
+        },
+        {
+          className: "clear",
+          length: 6
         }
       ],
       [
@@ -83,6 +94,10 @@ export class Logo extends React.Component<LogoProps, LogoState> {
         {
           className: "back",
           length: 25
+        },
+        {
+          className: "clear",
+          length: 3
         }
       ],
       [
@@ -100,11 +115,15 @@ export class Logo extends React.Component<LogoProps, LogoState> {
         },
         {
           className: "clear",
-          length: 25
+          length: 27
         },
         {
           className: "back",
           length: 25
+        },
+        {
+          className: "clear",
+          length: 1
         }
       ],
       [
@@ -122,7 +141,7 @@ export class Logo extends React.Component<LogoProps, LogoState> {
         },
         {
           className: "clear",
-          length: 25
+          length: 27
         },
         {
           className: "back",
@@ -144,7 +163,7 @@ export class Logo extends React.Component<LogoProps, LogoState> {
         },
         {
           className: "clear",
-          length: 22
+          length: 24
         },
         {
           className: "back",
@@ -162,278 +181,120 @@ export class Logo extends React.Component<LogoProps, LogoState> {
         },
         {
           className: "fore",
-          length: 19
+          length: 15
         },
         {
           className: "clear",
-          length: 10
+          length: 16
         },
         {
           className: "back",
           length: 25
-        }
-      ],
-      [
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 13
-        },
-        {
-          className: "fore",
-          length: 19
-        },
-        {
-          className: "clear",
-          length: 4
-        },
-        {
-          className: "back",
-          length: 25
-        }
-      ],
-      [
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 22
-        },
-        {
-          className: "fore",
-          length: 14
-        },
-        {
-          className: "clear",
-          length: 0
-        },
-        {
-          className: "back",
-          length: 25
-        }
-      ],
-      [
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 27
-        },
-        {
-          className: "fore",
-          length: 11
-        },
-        {
-          className: "clear",
-          length: 0
-        },
-        {
-          className: "back",
-          length: 23
-        }
-      ],
-      [
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 29
-        },
-        {
-          className: "fore",
-          length: 11
-        },
-        {
-          className: "clear",
-          length: 0
-        },
-        {
-          className: "back",
-          length: 21
-        }
-      ],
-      [
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 29
-        },
-        {
-          className: "fore",
-          length: 11
-        },
-        {
-          className: "clear",
-          length: 0
-        },
-        {
-          className: "back",
-          length: 21
-        }
-      ],
-      [
-        {
-          className: "clear",
-          length: 1
-        },
-        {
-          className: "back",
-          length: 24
-        },
-        {
-          className: "clear",
-          length: 0
-        },
-        {
-          className: "fore",
-          length: 6
-        },
-        {
-          className: "clear",
-          length: 21
-        },
-        {
-          className: "fore",
-          length: 10
-        },
-        {
-          className: "back",
-          length: 24
-        },
-        {
-          className: "clear",
-          length: 1
-        }
-      ],
-      [
-        {
-          className: "clear",
-          length: 4
-        },
-        {
-          className: "back",
-          length: 21
-        },
-        {
-          className: "clear",
-          length: 0
-        },
-        {
-          className: "fore",
-          length: 34
-        },
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 4
-        }
-      ],
-      [
-        {
-          className: "clear",
-          length: 9
-        },
-        {
-          className: "back",
-          length: 21
-        },
-        {
-          className: "clear",
-          length: 0
-        },
-        {
-          className: "fore",
-          length: 25
-        },
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 9
-        }
-      ],
-      [
-        {
-          className: "clear",
-          length: 11
-        },
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 0
-        },
-        {
-          className: "fore",
-          length: 13
-        },
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 14
         }
       ]
     ];
 
-    let lines = lineLengths.map((value, index) => {
+    let middleLineLengths: Segment[][] = [
+      [
+        {
+          className: "back",
+          length: 25
+        },
+        {
+          className: "clear",
+          length: 11
+        },
+        {
+          className: "fore",
+          length: 16
+        },
+        {
+          className: "clear",
+          length: 11
+        },
+        {
+          className: "back",
+          length: 25
+        }
+      ]
+    ];
+    let endHalfLineLengths: Segment[][] = [];
+    for (let startLineLength of beginningHalfLineLengths) {
+      let endLineLength = startLineLength.slice();
+      endLineLength.reverse();
+      endHalfLineLengths.unshift(endLineLength);
+    }
+
+    let lines = [
+      ...beginningHalfLineLengths,
+      ...middleLineLengths,
+      ...endHalfLineLengths
+    ].map((value, index) => {
       return {
         index: index,
         segments: value
       };
     });
 
-    // lines.sort((a, b) => {
-    //   let aFore = a.segments.find(segment => {
-    //     return segment.className.localeCompare("fore") === 0;
-    //   }) || { length: 0 };
-    //   let bFore = b.segments.find(segment => {
-    //     return segment.className.localeCompare("fore") === 0;
-    //   }) || { length: 0 };
-
-    //   return bFore.length - aFore.length;
-    // });
+    if (props.isAnimated) {
+      lines.sort((a, b) => {
+        let aFore = a.segments.find(segment => {
+          return segment.className.localeCompare("fore") === 0;
+        }) || { length: 0 };
+        let bFore = b.segments.find(segment => {
+          return segment.className.localeCompare("fore") === 0;
+        }) || { length: 0 };
+        return bFore.length - aFore.length;
+      });
+    }
 
     this.state = {
-      lines: lines
+      lines: lines,
+      isSorted: !props.isAnimated
     };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        isSorted: true
+      });
+    }, 3000);
   }
 
   render() {
     let { lines } = this.state;
+    let totalHeight = Logo.HEIGHT_PER_LINE * lines.length - 1;
 
     return (
-      <svg className="sci-sortier-documentation-logo" viewBox="0 0 88 65">
+      <svg
+        className="sci-sortier-documentation-logo"
+        viewBox={`0 0 90 ${totalHeight}`}
+        onMouseEnter={this.mouseEnter}
+        onMouseLeave={this.mouseLeave}
+      >
         {lines.map((value, index) => {
-          let y = index * 4 + 1;
-          return this.renderSegments(value, y);
+          return this.renderSegments(value, index);
         })}
       </svg>
     );
   }
 
-  renderSegments(value: Line, y: number) {
+  mouseEnter = () => {
+    this.setState({
+      isSorted: false
+    });
+  };
+
+  mouseLeave = () => {
+    this.setState({
+      isSorted: true
+    });
+  };
+
+  renderSegments(value: Line, unsortedIndex: number) {
+    let { isSorted } = this.state;
+
     let start = 0;
     let paths = value.segments.map((segment, index) => {
       if (segment.length == 0) {
@@ -444,7 +305,7 @@ export class Logo extends React.Component<LogoProps, LogoState> {
         <path
           key={index}
           className={segment.className}
-          d={`M${start + 4} ${y} l${segment.length - 4} 0`}
+          d={`M${start + 4} 0 l${segment.length - 4} 0`}
         />
       );
       start = newStart;
@@ -456,11 +317,27 @@ export class Logo extends React.Component<LogoProps, LogoState> {
         <path
           key={value.segments.length}
           className={"clear"}
-          d={`M${start + 4} ${y} l${126} 0`}
+          d={`M${start + 4} 0 l${126} 0`}
         />
       );
     }
 
-    return <g key={value.index}>{paths}</g>;
+    let currentIndex = unsortedIndex;
+    if (isSorted) {
+      currentIndex = value.index;
+    }
+
+    let y = currentIndex * Logo.HEIGHT_PER_LINE + 1;
+    let transform = `translate(0, ${y}px)`;
+
+    return (
+      <g
+        key={value.index}
+        data-number={value.index}
+        style={{ transform: transform }}
+      >
+        {paths}
+      </g>
+    );
   }
 }
