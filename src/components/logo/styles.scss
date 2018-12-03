@@ -1,0 +1,22 @@
+@import "../../../styles/colors";
+
+.sci-sortier-documentation-logo {
+  > g {
+    height: 10px;
+
+    > path {
+      stroke-width: 2px;
+      stroke-linecap: round;
+
+      &.clear {
+        stroke: transparent;
+      }
+      &.back {
+        stroke: $blue-10;
+      }
+      &.fore {
+        stroke: $blue-70;
+      }
+    }
+  }
+}

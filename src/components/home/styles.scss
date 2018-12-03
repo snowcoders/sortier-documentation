@@ -1,0 +1,11 @@
+.sci-sortier-documentation-home {
+  > .logo {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    > .sci-sortier-documentation-logo {
+      max-height: 200px;
+    }
+  }
+}
