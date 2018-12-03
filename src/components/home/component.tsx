@@ -7,7 +7,7 @@ export class Home extends React.Component {
       <div className="sci-sortier-documentation-home">
         <div className="logo">
           <Logo isAnimated={true} />
-          <p className="tag-line">Keep your code sorted</p>
+          <p className="tag-line">Stay sorted</p>
         </div>
         <div className="introduction">
           <p>
