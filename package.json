@@ -18,8 +18,8 @@
     "@snowcoders/sortier": "2.3.1",
     "@types/classnames": "2.2.6",
     "@types/highlight.js": "9.12.3",
-    "@types/node": "10.12.11",
-    "@types/react": "16.7.11",
+    "@types/node": "10.12.12",
+    "@types/react": "16.7.13",
     "@types/react-dom": "16.0.11",
     "@types/react-router-dom": "4.3.1",
     "@types/react-router-hash-link": "^1.2.0",
@@ -45,8 +45,8 @@
     "style-loader": "0.23.1",
     "ts-node": "7.0.1",
     "tslib": "1.9.3",
-    "typescript": "3.2.1",
-    "webpack": "4.26.1",
+    "typescript": "3.2.2",
+    "webpack": "4.27.1",
     "webpack-cli": "3.1.2"
   }
 }
