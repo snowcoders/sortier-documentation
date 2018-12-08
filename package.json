@@ -9,7 +9,7 @@
     "prepare": "npm run clean && npm run build",
     "start": "concurrently --kill-others \"npm run watch\" \"npm run serve\"",
     "serve": "live-server --port=53002 --host=localhost --watch=dist,index.html",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch --mode=development"
   },
   "repository": "https://github.com/snowcoders/sortier-documentation",
   "author": "Snowcoders",
@@ -22,6 +22,7 @@
     "@types/react": "16.7.11",
     "@types/react-dom": "16.0.11",
     "@types/react-router-dom": "4.3.1",
+    "@types/react-router-hash-link": "^1.2.0",
     "@types/webpack": "4.4.20",
     "awesome-typescript-loader": "5.2.1",
     "classnames": "2.2.6",
@@ -37,6 +38,7 @@
     "react": "16.6.3",
     "react-dom": "16.6.3",
     "react-router-dom": "4.3.1",
+    "react-router-hash-link": "^1.2.1",
     "rimraf": "2.6.2",
     "sass-loader": "7.1.0",
     "source-map-loader": "0.2.4",

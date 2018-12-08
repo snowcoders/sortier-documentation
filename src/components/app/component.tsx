@@ -2,21 +2,74 @@ import * as React from "react";
 
 import { HashRouter, Link, Route, Switch } from "react-router-dom";
 
-import { Home } from "../home";
+import { Home } from "../page-home";
+import { About } from "../page-about";
+import { Philosophy } from "../page-philosophy";
+import { Install } from "../page-install";
+import { Running } from "../page-running";
+import { Configuration } from "../page-configuration";
 
 export interface IAppProps {}
 
 export interface IAppState {}
 
+type LinkNode = LinkFolder | LinkConfig;
+
+interface LinkFolder {
+  name: string;
+  children: LinkNode[];
+}
+
+interface LinkConfig {
+  name: string;
+  url: string;
+  component: React.ComponentType<any> | React.ComponentType<any>;
+}
+
 export class App extends React.Component<IAppProps, IAppState> {
   render() {
-    let documentationLinkConfig: any[] = [];
-    let componentLinkConfig: any[] = [];
-
-    // Sort them just in case we were idiots and cant sort things
-    componentLinkConfig.sort((a, b) => {
-      return a.url.localeCompare(b.url);
-    });
+    let links: LinkNode[] = [
+      {
+        name: "Home",
+        url: "/",
+        component: Home
+      },
+      {
+        name: "Background",
+        children: [
+          {
+            name: "About",
+            url: "/about",
+            component: About
+          },
+          {
+            name: "Philosophy",
+            url: "/philosophy",
+            component: Philosophy
+          }
+        ]
+      },
+      {
+        name: "Usage",
+        children: [
+          {
+            name: "Install",
+            url: "/install",
+            component: Install
+          },
+          {
+            name: "Running",
+            url: "/running",
+            component: Running
+          },
+          {
+            name: "Configuration",
+            url: "/configuration",
+            component: Configuration
+          }
+        ]
+      }
+    ];
 
     return (
       <HashRouter>
@@ -45,62 +98,10 @@ export class App extends React.Component<IAppProps, IAppState> {
             </div>
           </div>
           <div className="page">
-            <div className="navigation">
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <span>Usage</span>
-                  <ul>
-                    {documentationLinkConfig.map(value => {
-                      return (
-                        <li key={value.name}>
-                          <Link to={value.url}>{value.name}</Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </li>
-                <li>
-                  <span>Example Settings</span>
-                  <ul>
-                    {componentLinkConfig.map(value => {
-                      return (
-                        <li key={value.name}>
-                          <Link to={value.url}>{value.name}</Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </li>
-              </ul>
-            </div>
+            <div className="navigation">{this.renderNavTree(links)}</div>
             <div className="content">
               <Switch>
-                {documentationLinkConfig
-                  .map(value => {
-                    return (
-                      <Route
-                        key={value.name}
-                        exact
-                        path={value.url}
-                        component={value.component}
-                      />
-                    );
-                  })
-                  .concat(
-                    componentLinkConfig.map(value => {
-                      return (
-                        <Route
-                          key={value.name}
-                          exact
-                          path={value.url}
-                          component={value.component}
-                        />
-                      );
-                    })
-                  )}
+                {this.renderRouteSwitch(links)}
                 <Route path="*" component={Home} />
               </Switch>
             </div>
@@ -108,5 +109,59 @@ export class App extends React.Component<IAppProps, IAppState> {
         </div>
       </HashRouter>
     );
+  }
+
+  private renderNavTree(nodes: LinkNode[]) {
+    return (
+      <ul>
+        {nodes.map(value => {
+          let link = value as LinkConfig;
+          let folder = value as LinkFolder;
+          if (link.component != null) {
+            return (
+              <li key={link.name}>
+                <Link to={link.url}>{link.name}</Link>
+              </li>
+            );
+          } else if (folder.children != null) {
+            return (
+              <li key={folder.name}>
+                <span>{folder.name}</span>
+                {this.renderNavTree(folder.children)}
+              </li>
+            );
+          } else {
+            console.error("Invalid link definition");
+          }
+
+          return null;
+        })}
+      </ul>
+    );
+  }
+
+  private renderRouteSwitch(nodes: LinkNode[]) {
+    let routes: React.ReactNode[] = [];
+
+    for (let value of nodes) {
+      let link = value as LinkConfig;
+      let folder = value as LinkFolder;
+      if (link.component) {
+        routes.push(
+          <Route
+            key={link.name}
+            exact
+            path={link.url}
+            component={link.component}
+          />
+        );
+      } else if (folder.children) {
+        routes.push(...this.renderRouteSwitch(folder.children));
+      } else {
+        console.error("Invalid link definition");
+      }
+    }
+
+    return routes;
   }
 }
