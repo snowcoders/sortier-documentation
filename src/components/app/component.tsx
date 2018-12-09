@@ -5,9 +5,12 @@ import { HashRouter, Link, Route, Switch } from "react-router-dom";
 import { Home } from "../page-home";
 import { About } from "../page-about";
 import { Philosophy } from "../page-philosophy";
+import { Playground } from "../page-playground";
 import { Install } from "../page-install";
 import { Running } from "../page-running";
 import { Configuration } from "../page-configuration";
+import { OptionsGeneral } from "../page-options-general";
+import { OptionsJs } from "../page-options-js";
 
 export interface IAppProps {}
 
@@ -68,6 +71,16 @@ export class App extends React.Component<IAppProps, IAppState> {
             component: Configuration
           }
         ]
+      },
+      {
+        name: "Options - General",
+        url: "/options-general",
+        component: OptionsGeneral
+      },
+      {
+        name: "Options - Javascript",
+        url: "/options-js",
+        component: OptionsJs
       }
     ];
 
@@ -79,6 +92,8 @@ export class App extends React.Component<IAppProps, IAppState> {
               <Link to="/">Sortier</Link>
             </div>
             <div className="links">
+              {/* TODO uncomment when playground is enabled */}
+              {/*<Link to="/play">Play</Link>*/}
               <a href="https://github.com/snowcoders/sortier" target="_blank">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -98,10 +113,19 @@ export class App extends React.Component<IAppProps, IAppState> {
             </div>
           </div>
           <div className="page">
-            <div className="navigation">{this.renderNavTree(links)}</div>
+            <Switch>
+              <Route path="/play" render={() => null} />
+              <Route
+                path="*"
+                render={() => (
+                  <div className="navigation">{this.renderNavTree(links)}</div>
+                )}
+              />
+            </Switch>
             <div className="content">
               <Switch>
                 {this.renderRouteSwitch(links)}
+                <Route path="/play" component={Playground} />
                 <Route path="*" component={Home} />
               </Switch>
             </div>

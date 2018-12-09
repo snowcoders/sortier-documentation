@@ -63,6 +63,15 @@
     }
     > .links {
       flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // TODO fix this negative margin with grid layout
+      margin: -10px;
+
+      > * {
+        margin: 10px;
+      }
     }
   }
   > .page {

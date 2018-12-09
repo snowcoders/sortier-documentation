@@ -5,7 +5,7 @@ import "highlight.js/styles/atom-one-light.css";
 
 export interface ICodeHighlighterProps {
   isInline?: boolean;
-  language: "js" | "bash";
+  language: "js" | "bash" | "ts";
   source: string;
 }
 

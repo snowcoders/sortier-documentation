@@ -19,6 +19,7 @@ export class Philosophy extends React.Component {
           sort across an empty blank line. For example without a blank line:
         </p>
         <CodeHighlighter
+          language="js"
           source={`
 type Props = {
   source: "NYC",
@@ -31,6 +32,7 @@ type Props = {
         />
         <p>Is rewritten to:</p>
         <CodeHighlighter
+          language="js"
           source={`
 type Props = {
   airplane: "Boeing",
@@ -46,6 +48,7 @@ type Props = {
           of plane along with it's path and the contents of the plane:
         </p>
         <CodeHighlighter
+          language="js"
           source={`
 type Props = {
   source: "NYC",
@@ -59,6 +62,7 @@ type Props = {
         />
         <p>Is rewritten to:</p>
         <CodeHighlighter
+          language="js"
           source={`
 type Props = {
   airplane: "Boeing",
@@ -77,6 +81,7 @@ type Props = {
           Using our existing example, let's add some comments for each property
         </p>
         <CodeHighlighter
+          language="js"
           source={`type Props = {
   /*
    * Where the plane came from
@@ -100,6 +105,7 @@ type Props = {
           they reference:
         </p>
         <CodeHighlighter
+          language="js"
           source={`type Props = {
   // The airplane type
   airplane: "Boeing",
@@ -123,6 +129,7 @@ type Props = {
           groups instead:
         </p>
         <CodeHighlighter
+          language="js"
           source={`type Props = {
   // Flight details
   source: "NYC",
@@ -139,6 +146,7 @@ type Props = {
           the overall group:
         </p>
         <CodeHighlighter
+          language="js"
           source={`type Props = {
   // Flight details
   airplane: "Boeing",

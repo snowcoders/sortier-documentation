@@ -1,0 +1,17 @@
+.sci-sortier-documentation-playground {
+  > .actions {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  > .code {
+    display: flex;
+    flex-flow: row nowrap;
+    // TODO move the min-height to the parent
+    min-height: 600px;
+
+    > * {
+      flex: 1 1 0px;
+      border: 1px solid black;
+    }
+  }
+}
