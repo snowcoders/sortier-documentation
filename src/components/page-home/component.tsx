@@ -14,7 +14,7 @@ export class Home extends React.Component {
             Sortier is a code sorter that reorders code so you don't have to.
             The idea here is if everyone is checking in code that is organized
             in a similar way, then there will be less conflicts, everyone can
-            expect things to be in the same place in every file and there is
+            expect things to be in the same place in every file, and there is
             less arguments regarding code styling.
           </p>
           <p>

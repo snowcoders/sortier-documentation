@@ -40,12 +40,17 @@ export class Running extends React.Component {
 import { format } from "@snowcoders/sortier";
 
 format("./package.json", {
-  isHelpMode: true,
+  logLevel: "diagnostic",
   isTestRun: true,
 });
 `}
           language="js"
         />
+        <p>
+          The first argument is the file you wish to format. The second argument
+          is a JSON object of options of which more details can be found in
+          later sections.
+        </p>
       </div>
     );
   }

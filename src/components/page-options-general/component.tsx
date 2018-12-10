@@ -12,13 +12,13 @@ export class OptionsGeneral extends React.Component {
           There are three options:
         </p>
         <ul>
-          <li>quiet - Log nothing to the console</li>
+          <li>"quiet" - Log nothing to the console</li>
           <li>
-            normal - General information (e.g. if sortier was unable to parse a
-            file)
+            "normal" - General information (e.g. if sortier was unable to parse
+            a file)
           </li>
           <li>
-            diagnostic - Log detailed information regarding scenarios sortier
+            "diagnostic" - Log detailed information regarding scenarios sortier
             was unable to handle
           </li>
         </ul>
