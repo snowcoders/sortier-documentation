@@ -4,8 +4,10 @@ export interface LogoProps {
   isAnimated: boolean;
 }
 
+type SegmentClassNameOption = "back-1" | "back-2" | "back-3" | "clear" | "fore";
+
 interface Segment {
-  className: "back" | "clear" | "fore";
+  className: SegmentClassNameOption;
   length: number;
 }
 
@@ -24,81 +26,35 @@ export class Logo extends React.Component<LogoProps, LogoState> {
 
   constructor(props: LogoProps) {
     super(props);
-
     let beginningHalfLineLengths: Segment[][] = [
       [
-        {
-          className: "clear",
-          length: 14
-        },
-        {
-          className: "back",
-          length: 25
-        },
+        ...this.generateBackgroundColors(39, true),
         {
           className: "fore",
           length: 13
         },
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 14
-        }
+        ...this.generateBackgroundColors(39, false)
       ],
       [
-        {
-          className: "clear",
-          length: 6
-        },
-        {
-          className: "back",
-          length: 25
-        },
+        ...this.generateBackgroundColors(31, true),
         {
           className: "fore",
           length: 28
         },
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 6
-        }
+        ...this.generateBackgroundColors(31, false)
       ],
       [
-        {
-          className: "clear",
-          length: 3
-        },
-        {
-          className: "back",
-          length: 25
-        },
+        ...this.generateBackgroundColors(28, true),
         {
           className: "fore",
           length: 12
         },
-        {
-          className: "clear",
-          length: 13
-        },
+        ...this.generateBackgroundColors(19, null),
         {
           className: "fore",
           length: 8
         },
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 3
-        }
+        ...this.generateBackgroundColors(28, false)
       ],
       [
         {
@@ -106,7 +62,7 @@ export class Logo extends React.Component<LogoProps, LogoState> {
           length: 1
         },
         {
-          className: "back",
+          className: "back-1",
           length: 25
         },
         {
@@ -118,7 +74,7 @@ export class Logo extends React.Component<LogoProps, LogoState> {
           length: 27
         },
         {
-          className: "back",
+          className: "back-1",
           length: 25
         },
         {
@@ -128,7 +84,7 @@ export class Logo extends React.Component<LogoProps, LogoState> {
       ],
       [
         {
-          className: "back",
+          className: "back-1",
           length: 25
         },
         {
@@ -144,13 +100,13 @@ export class Logo extends React.Component<LogoProps, LogoState> {
           length: 27
         },
         {
-          className: "back",
+          className: "back-1",
           length: 25
         }
       ],
       [
         {
-          className: "back",
+          className: "back-1",
           length: 25
         },
         {
@@ -166,13 +122,13 @@ export class Logo extends React.Component<LogoProps, LogoState> {
           length: 24
         },
         {
-          className: "back",
+          className: "back-1",
           length: 25
         }
       ],
       [
         {
-          className: "back",
+          className: "back-1",
           length: 25
         },
         {
@@ -188,7 +144,7 @@ export class Logo extends React.Component<LogoProps, LogoState> {
           length: 16
         },
         {
-          className: "back",
+          className: "back-1",
           length: 25
         }
       ]
@@ -197,7 +153,7 @@ export class Logo extends React.Component<LogoProps, LogoState> {
     let middleLineLengths: Segment[][] = [
       [
         {
-          className: "back",
+          className: "back-1",
           length: 25
         },
         {
@@ -213,7 +169,7 @@ export class Logo extends React.Component<LogoProps, LogoState> {
           length: 11
         },
         {
-          className: "back",
+          className: "back-1",
           length: 25
         }
       ]
@@ -280,19 +236,78 @@ export class Logo extends React.Component<LogoProps, LogoState> {
     );
   }
 
-  mouseEnter = () => {
+  private generateBackgroundColors(
+    length: number,
+    isStart: boolean | null
+  ): Segment[] {
+    let colors: Segment[] = [];
+    let nextLength = this.getNextLength(length);
+    let lastColor: SegmentClassNameOption | undefined = undefined;
+    if (isStart != null) {
+      colors.push({
+        className: "clear",
+        length: nextLength
+      });
+      length = length - nextLength;
+    }
+
+    while (2 < length) {
+      nextLength = this.getNextLength(length);
+      lastColor = this.getNextBackColor(lastColor);
+
+      colors.push({
+        className: lastColor,
+        length: nextLength
+      });
+
+      length = length - nextLength;
+    }
+
+    colors[colors.length - 1].length + length;
+
+    console.log(JSON.stringify(colors));
+
+    if (!isStart) {
+      colors.reverse();
+    }
+    return colors;
+  }
+
+  private getNextLength(length: number) {
+    return Math.round(Math.random() * 6) + 8;
+  }
+
+  private getNextBackColor(
+    lastColor?: SegmentClassNameOption
+  ): SegmentClassNameOption {
+    let number = 0;
+    let color = lastColor;
+    do {
+      number = Math.random() * 3;
+      if (number < 1) {
+        color = "back-1";
+      } else if (number < 2) {
+        color = "back-2";
+      } else {
+        color = "back-3";
+      }
+    } while (lastColor === color);
+    return color || "back-1";
+  }
+
+  private mouseEnter = () => {
     this.setState({
       isSorted: false
     });
   };
 
-  mouseLeave = () => {
+  private mouseLeave = () => {
     this.setState({
       isSorted: true
     });
   };
 
-  renderSegments(value: Line, unsortedIndex: number) {
+  private renderSegments(value: Line, unsortedIndex: number) {
     let { isSorted } = this.state;
 
     let start = 0;
