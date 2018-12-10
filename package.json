@@ -1,7 +1,7 @@
 {
   "name": "@snowcoders/sortier-documentation",
   "description": "Documentation site for Sortier",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/main.js",
   "scripts": {
     "build": "webpack-cli",

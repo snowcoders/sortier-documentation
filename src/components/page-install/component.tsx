@@ -27,6 +27,81 @@ export class Install extends React.Component {
           source={"yarn add prettier --dev --exact"}
           language="bash"
         />
+        <h2>Pre-commit hook</h2>
+        <p>
+          We went with a system similar to{" "}
+          <a href="https://prettier.io/docs/en/precommit.html" target="_blank">
+            Prettier
+          </a>{" "}
+          so hopefully you have already picked a solution and can keep going
+          with it. If not, this repository uses{" "}
+          <CodeHighlighter
+            isInline={true}
+            source={"lint-staged"}
+            language="bash"
+          />{" "}
+          and{" "}
+          <CodeHighlighter isInline={true} source={"husky"} language="bash" />.
+        </p>
+        <ol>
+          <li>
+            <p>
+              Run{" "}
+              <CodeHighlighter
+                isInline={true}
+                source={"npm install --save-dev lint-staged husky"}
+                language="bash"
+              />
+            </p>
+          </li>
+          <li>
+            <p>
+              Create a{" "}
+              <CodeHighlighter
+                isInline={true}
+                source={".huskyrc.json"}
+                language="bash"
+              />{" "}
+              file with the contents
+            </p>
+            <CodeHighlighter
+              source={`
+{
+  "hooks": {
+    "pre-commit": "lint-staged"
+  }
+}
+`}
+              language="ts"
+            />
+          </li>
+          <li>
+            <p>
+              Create a{" "}
+              <CodeHighlighter
+                isInline={true}
+                source={".lintstagedrc.json"}
+                language="bash"
+              />{" "}
+              file with the contents
+            </p>
+            <CodeHighlighter
+              source={`
+{
+  "linters": {
+    "**/*.{ts,tsx,js,jsx,json,html}": [
+      "prettier --write", // Remove if you don't have prettier installed
+      "sortier",
+      "git add"
+    ]
+  },
+  "ignore": ["**/package-lock.json"]
+}
+`}
+              language="ts"
+            />
+          </li>
+        </ol>
       </div>
     );
   }
