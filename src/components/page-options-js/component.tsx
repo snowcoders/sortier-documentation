@@ -137,28 +137,59 @@ interface CustomReactProps {
         />
         <h2>sortClassContents (Default: undefined)</h2>
         <p>
-          By default this feature is turned off because when beta testing we
-          found that everyone has their own customizations of which they wish to
-          apply. Since this reorganization can be quite jarring depending on
-          your code style, we decided to turn it off for now.
+          Sorts all class content by groupings (static, constructor, properties
+          then functions) then by access modifiers (public, protected, private)
         </p>
+        <p>By default this feature is turned off for a few reasons:</p>
+        <ul>
+          <li>
+            It sorts ignoring blank lines which goes against our initial
+            documentation
+          </li>
+          <li>We're still beta testing the whole thing</li>
+          <li>But mainly that first reason</li>
+        </ul>
+        <p>The options available are</p>
+        <ul>
+          <li>
+            order - The order you wish to arrange the class contents
+            <ul>
+              <li>"alpha" - Order alphabetically</li>
+              <li>
+                "usage" - Order by usage based on reading from the top of the
+                document down
+              </li>
+            </ul>
+          </li>
+          <li>
+            isAscending - true to sort in order (e.g. for "alpha" a-z) or false
+            for reverse
+          </li>
+          <li>
+            overrides - Array of function names you wish to explicitly define
+            their location. Note that "*" will match anything not listed.
+          </li>
+        </ul>
         <h4>Example json configuration</h4>
         <CodeHighlighter
           language={"js"}
           source={`
 {
   "js": {
-    "isAscending": true,
-    "order": "usage",
-    "overrides": [
-      // Overrides for react components
-      "getDerivedStateFromProps", 
-      "componentWillMount", 
-      "componentDidMount", 
-      "shouldComponentUpdate", 
-      "componentWillUnmount", 
-      "componentDidUnmount", 
-      "render"]
+    "sortClassContents": {
+      "isAscending": true,
+      "order": "usage",
+      "overrides": [
+        // Overrides for react components
+        "getDerivedStateFromProps", 
+        "componentWillMount", 
+        "componentDidMount", 
+        "shouldComponentUpdate", 
+        "componentWillUnmount", 
+        "componentDidUnmount", 
+        "render",
+        "*"]
+    }
   }
 }`}
         />
