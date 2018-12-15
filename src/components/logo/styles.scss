@@ -11,8 +11,14 @@
       &.clear {
         stroke: transparent;
       }
-      &.back {
+      &.back-1 {
         stroke: $blue-10;
+      }
+      &.back-2 {
+        stroke: $orange-10;
+      }
+      &.back-3 {
+        stroke: $purple-10;
       }
       &.fore {
         stroke: $blue-70;

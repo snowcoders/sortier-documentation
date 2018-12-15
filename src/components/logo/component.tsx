@@ -4,8 +4,10 @@ export interface LogoProps {
   isAnimated: boolean;
 }
 
+type SegmentClassNameOption = "back-1" | "back-2" | "back-3" | "clear" | "fore";
+
 interface Segment {
-  className: "back" | "clear" | "fore";
+  className: SegmentClassNameOption;
   length: number;
 }
 
@@ -21,201 +23,82 @@ export interface LogoState {
 
 export class Logo extends React.Component<LogoProps, LogoState> {
   private static HEIGHT_PER_LINE: number = 3.5;
+  private static SPACE_BETWEEN_SEGMENTS: number = 4;
 
   constructor(props: LogoProps) {
     super(props);
-
     let beginningHalfLineLengths: Segment[][] = [
       [
-        {
-          className: "clear",
-          length: 14
-        },
-        {
-          className: "back",
-          length: 25
-        },
+        ...this.generateBackgroundColors(38, true),
         {
           className: "fore",
-          length: 13
-        },
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
           length: 14
-        }
+        },
+        ...this.generateBackgroundColors(38, false)
       ],
       [
-        {
-          className: "clear",
-          length: 6
-        },
-        {
-          className: "back",
-          length: 25
-        },
+        ...this.generateBackgroundColors(31, true),
         {
           className: "fore",
           length: 28
         },
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 6
-        }
+        ...this.generateBackgroundColors(31, false)
       ],
       [
-        {
-          className: "clear",
-          length: 3
-        },
-        {
-          className: "back",
-          length: 25
-        },
+        ...this.generateBackgroundColors(28, true),
         {
           className: "fore",
           length: 12
         },
-        {
-          className: "clear",
-          length: 13
-        },
+        ...this.generateBackgroundColors(14, null),
         {
           className: "fore",
           length: 8
         },
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 3
-        }
+        ...this.generateBackgroundColors(28, false)
       ],
       [
-        {
-          className: "clear",
-          length: 1
-        },
-        {
-          className: "back",
-          length: 25
-        },
+        ...this.generateBackgroundColors(26, true),
         {
           className: "fore",
           length: 10
         },
-        {
-          className: "clear",
-          length: 27
-        },
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 1
-        }
+        ...this.generateBackgroundColors(54, false)
       ],
       [
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 1
-        },
+        ...this.generateBackgroundColors(26, true),
         {
           className: "fore",
           length: 10
         },
-        {
-          className: "clear",
-          length: 27
-        },
-        {
-          className: "back",
-          length: 25
-        }
+        ...this.generateBackgroundColors(54, false)
       ],
       [
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 3
-        },
+        ...this.generateBackgroundColors(28, true),
         {
           className: "fore",
           length: 11
         },
-        {
-          className: "clear",
-          length: 24
-        },
-        {
-          className: "back",
-          length: 25
-        }
+        ...this.generateBackgroundColors(51, false)
       ],
       [
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 7
-        },
+        ...this.generateBackgroundColors(32, true),
         {
           className: "fore",
           length: 15
         },
-        {
-          className: "clear",
-          length: 16
-        },
-        {
-          className: "back",
-          length: 25
-        }
+        ...this.generateBackgroundColors(43, false)
       ]
     ];
 
     let middleLineLengths: Segment[][] = [
       [
-        {
-          className: "back",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 11
-        },
+        ...this.generateBackgroundColors(37, true),
         {
           className: "fore",
           length: 16
         },
-        {
-          className: "clear",
-          length: 11
-        },
-        {
-          className: "back",
-          length: 25
-        }
+        ...this.generateBackgroundColors(37, false)
       ]
     ];
     let endHalfLineLengths: Segment[][] = [];
@@ -280,47 +163,97 @@ export class Logo extends React.Component<LogoProps, LogoState> {
     );
   }
 
-  mouseEnter = () => {
+  private generateBackgroundColors(
+    length: number,
+    isStart: boolean | null
+  ): Segment[] {
+    let colors: Segment[] = [];
+    let nextLength = this.getNextLength(length);
+    let lastColor: SegmentClassNameOption | undefined = undefined;
+    if (isStart != null) {
+      colors.push({
+        className: "clear",
+        length: nextLength
+      });
+      length = length - nextLength;
+    }
+
+    while (0 < length) {
+      nextLength = this.getNextLength(length);
+      lastColor = this.getNextBackColor(lastColor);
+
+      colors.push({
+        className: lastColor,
+        length: nextLength
+      });
+
+      length = length - nextLength;
+    }
+
+    if (!isStart) {
+      colors.reverse();
+    }
+    return colors;
+  }
+
+  private getNextLength(length: number) {
+    let generatedLength =
+      Math.round(Math.random() * 8) + Logo.SPACE_BETWEEN_SEGMENTS * 2;
+    return Math.min(length, generatedLength);
+  }
+
+  private getNextBackColor(
+    lastColor?: SegmentClassNameOption
+  ): SegmentClassNameOption {
+    let number = 0;
+    let color = lastColor;
+    do {
+      number = Math.random() * 3;
+      if (number < 1) {
+        color = "back-1";
+      } else if (number < 2) {
+        color = "back-2";
+      } else {
+        color = "back-3";
+      }
+    } while (lastColor === color);
+    return color || "back-1";
+  }
+
+  private mouseEnter = () => {
     this.setState({
       isSorted: false
     });
   };
 
-  mouseLeave = () => {
+  private mouseLeave = () => {
     this.setState({
       isSorted: true
     });
   };
 
-  renderSegments(value: Line, unsortedIndex: number) {
+  private renderSegments(value: Line, unsortedIndex: number) {
     let { isSorted } = this.state;
 
     let start = 0;
+    let path = null;
     let paths = value.segments.map((segment, index) => {
-      if (segment.length == 0) {
-        return null;
-      }
       let newStart = start + segment.length;
-      let path = (
-        <path
-          className={segment.className}
-          d={`M${start + 4} 0 l${segment.length - 4} 0`}
-          key={index}
-        />
-      );
+      path = null;
+      // If the segment is long enough to render
+      if (segment.length >= Logo.SPACE_BETWEEN_SEGMENTS) {
+        path = (
+          <path
+            className={segment.className}
+            d={`M${start + Logo.SPACE_BETWEEN_SEGMENTS} 0 l${segment.length -
+              Logo.SPACE_BETWEEN_SEGMENTS} 0`}
+            key={index}
+          />
+        );
+      }
       start = newStart;
       return path;
     });
-
-    if (start !== 130) {
-      paths.push(
-        <path
-          className={"clear"}
-          d={`M${start + 4} 0 l${126} 0`}
-          key={value.segments.length}
-        />
-      );
-    }
 
     let currentIndex = unsortedIndex;
     if (isSorted) {
