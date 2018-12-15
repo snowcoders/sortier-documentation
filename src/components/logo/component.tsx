@@ -23,17 +23,18 @@ export interface LogoState {
 
 export class Logo extends React.Component<LogoProps, LogoState> {
   private static HEIGHT_PER_LINE: number = 3.5;
+  private static SPACE_BETWEEN_SEGMENTS: number = 4;
 
   constructor(props: LogoProps) {
     super(props);
     let beginningHalfLineLengths: Segment[][] = [
       [
-        ...this.generateBackgroundColors(39, true),
+        ...this.generateBackgroundColors(38, true),
         {
           className: "fore",
-          length: 13
+          length: 14
         },
-        ...this.generateBackgroundColors(39, false)
+        ...this.generateBackgroundColors(38, false)
       ],
       [
         ...this.generateBackgroundColors(31, true),
@@ -49,7 +50,7 @@ export class Logo extends React.Component<LogoProps, LogoState> {
           className: "fore",
           length: 12
         },
-        ...this.generateBackgroundColors(19, null),
+        ...this.generateBackgroundColors(14, null),
         {
           className: "fore",
           length: 8
@@ -57,121 +58,47 @@ export class Logo extends React.Component<LogoProps, LogoState> {
         ...this.generateBackgroundColors(28, false)
       ],
       [
-        {
-          className: "clear",
-          length: 1
-        },
-        {
-          className: "back-1",
-          length: 25
-        },
+        ...this.generateBackgroundColors(26, true),
         {
           className: "fore",
           length: 10
         },
-        {
-          className: "clear",
-          length: 27
-        },
-        {
-          className: "back-1",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 1
-        }
+        ...this.generateBackgroundColors(54, false)
       ],
       [
-        {
-          className: "back-1",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 1
-        },
+        ...this.generateBackgroundColors(26, true),
         {
           className: "fore",
           length: 10
         },
-        {
-          className: "clear",
-          length: 27
-        },
-        {
-          className: "back-1",
-          length: 25
-        }
+        ...this.generateBackgroundColors(54, false)
       ],
       [
-        {
-          className: "back-1",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 3
-        },
+        ...this.generateBackgroundColors(28, true),
         {
           className: "fore",
           length: 11
         },
-        {
-          className: "clear",
-          length: 24
-        },
-        {
-          className: "back-1",
-          length: 25
-        }
+        ...this.generateBackgroundColors(51, false)
       ],
       [
-        {
-          className: "back-1",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 7
-        },
+        ...this.generateBackgroundColors(32, true),
         {
           className: "fore",
           length: 15
         },
-        {
-          className: "clear",
-          length: 16
-        },
-        {
-          className: "back-1",
-          length: 25
-        }
+        ...this.generateBackgroundColors(43, false)
       ]
     ];
 
     let middleLineLengths: Segment[][] = [
       [
-        {
-          className: "back-1",
-          length: 25
-        },
-        {
-          className: "clear",
-          length: 11
-        },
+        ...this.generateBackgroundColors(37, true),
         {
           className: "fore",
           length: 16
         },
-        {
-          className: "clear",
-          length: 11
-        },
-        {
-          className: "back-1",
-          length: 25
-        }
+        ...this.generateBackgroundColors(37, false)
       ]
     ];
     let endHalfLineLengths: Segment[][] = [];
@@ -251,7 +178,7 @@ export class Logo extends React.Component<LogoProps, LogoState> {
       length = length - nextLength;
     }
 
-    while (2 < length) {
+    while (0 < length) {
       nextLength = this.getNextLength(length);
       lastColor = this.getNextBackColor(lastColor);
 
@@ -263,10 +190,6 @@ export class Logo extends React.Component<LogoProps, LogoState> {
       length = length - nextLength;
     }
 
-    colors[colors.length - 1].length + length;
-
-    console.log(JSON.stringify(colors));
-
     if (!isStart) {
       colors.reverse();
     }
@@ -274,7 +197,9 @@ export class Logo extends React.Component<LogoProps, LogoState> {
   }
 
   private getNextLength(length: number) {
-    return Math.round(Math.random() * 6) + 8;
+    let generatedLength =
+      Math.round(Math.random() * 8) + Logo.SPACE_BETWEEN_SEGMENTS * 2;
+    return Math.min(length, generatedLength);
   }
 
   private getNextBackColor(
@@ -311,31 +236,24 @@ export class Logo extends React.Component<LogoProps, LogoState> {
     let { isSorted } = this.state;
 
     let start = 0;
+    let path = null;
     let paths = value.segments.map((segment, index) => {
-      if (segment.length == 0) {
-        return null;
-      }
       let newStart = start + segment.length;
-      let path = (
-        <path
-          className={segment.className}
-          d={`M${start + 4} 0 l${segment.length - 4} 0`}
-          key={index}
-        />
-      );
+      path = null;
+      // If the segment is long enough to render
+      if (segment.length >= Logo.SPACE_BETWEEN_SEGMENTS) {
+        path = (
+          <path
+            className={segment.className}
+            d={`M${start + Logo.SPACE_BETWEEN_SEGMENTS} 0 l${segment.length -
+              Logo.SPACE_BETWEEN_SEGMENTS} 0`}
+            key={index}
+          />
+        );
+      }
       start = newStart;
       return path;
     });
-
-    if (start !== 130) {
-      paths.push(
-        <path
-          className={"clear"}
-          d={`M${start + 4} 0 l${126} 0`}
-          key={value.segments.length}
-        />
-      );
-    }
 
     let currentIndex = unsortedIndex;
     if (isSorted) {
