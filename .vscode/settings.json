@@ -2,8 +2,9 @@
   "html.format.extraLiners": "body",
   "html.format.indentInnerHtml": true,
   "search.exclude": {
-    "**/node_modules": true,
     "**/bower_components": true,
-    "**/dist": true
-  }
+    "**/dist": true,
+    "**/node_modules": true
+  },
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }
