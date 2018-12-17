@@ -1,28 +1,16 @@
 {
-  "name": "@snowcoders/sortier-documentation",
-  "description": "Documentation site for Sortier",
-  "version": "0.1.2",
-  "main": "dist/main.js",
-  "scripts": {
-    "build": "webpack-cli",
-    "clean": "rimraf dist",
-    "prepare": "npm run clean && npm run build",
-    "start": "concurrently --kill-others \"npm run watch\" \"npm run serve\"",
-    "serve": "live-server --port=53002 --host=localhost --watch=dist,index.html",
-    "watch": "webpack --watch --mode=development"
-  },
-  "repository": "https://github.com/snowcoders/sortier-documentation",
   "author": "Snowcoders",
-  "license": "MIT",
+  "description": "Documentation site for Sortier",
   "devDependencies": {
+    "@snowcoders/renovate-config": "0.2.0",
     "@snowcoders/sortier": "2.3.1",
     "@types/classnames": "2.2.6",
     "@types/highlight.js": "9.12.3",
     "@types/node": "10.12.15",
-    "@types/react": "16.7.17",
     "@types/react-dom": "16.0.11",
     "@types/react-router-dom": "4.3.1",
     "@types/react-router-hash-link": "1.2.0",
+    "@types/react": "16.7.17",
     "@types/webpack": "4.4.21",
     "awesome-typescript-loader": "5.2.1",
     "classnames": "2.2.6",
@@ -35,10 +23,10 @@
     "live-server": "1.2.1",
     "node-sass": "4.11.0",
     "prettier": "1.15.3",
-    "react": "16.6.3",
     "react-dom": "16.6.3",
     "react-router-dom": "4.3.1",
     "react-router-hash-link": "1.2.1",
+    "react": "16.6.3",
     "rimraf": "2.6.2",
     "sass-loader": "7.1.0",
     "source-map-loader": "0.2.4",
@@ -46,7 +34,20 @@
     "ts-node": "7.0.1",
     "tslib": "1.9.3",
     "typescript": "3.2.2",
-    "webpack": "4.27.1",
-    "webpack-cli": "3.1.2"
-  }
+    "webpack-cli": "3.1.2",
+    "webpack": "4.27.1"
+  },
+  "license": "MIT",
+  "main": "dist/main.js",
+  "name": "@snowcoders/sortier-documentation",
+  "repository": "https://github.com/snowcoders/sortier-documentation",
+  "scripts": {
+    "build": "webpack --mode=production",
+    "clean": "rimraf dist",
+    "prepare": "npm run clean && npm run build",
+    "serve": "live-server --port=53002 --host=localhost --watch=dist,index.html",
+    "start": "concurrently --kill-others \"npm run watch\" \"npm run serve\"",
+    "watch": "webpack --watch --mode=development"
+  },
+  "version": "0.1.2"
 }
