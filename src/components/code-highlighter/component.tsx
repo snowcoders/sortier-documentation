@@ -5,7 +5,7 @@ import "highlight.js/styles/atom-one-light.css";
 
 export interface ICodeHighlighterProps {
   isInline?: boolean;
-  language: "js" | "bash" | "ts";
+  language: "bash" | "css" | "js" | "ts";
   source: string;
 }
 
@@ -19,7 +19,7 @@ export class CodeHighlighter extends React.Component<ICodeHighlighterProps> {
   }
 
   render() {
-    let { isInline, source, language } = this.props;
+    let { isInline, language, source } = this.props;
     if (isInline) {
       return (
         <code

@@ -4,7 +4,7 @@ import { CodeHighlighter } from "../code-highlighter";
 export class Philosophy extends React.Component {
   render() {
     return (
-      <div className="sci-sortier-documentation-philosophy">
+      <div className="sci-sortier-documentation-page-philosophy">
         <h1>Philosophy</h1>
         <h2>Empty lines</h2>
         <p>

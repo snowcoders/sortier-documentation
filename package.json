@@ -49,5 +49,5 @@
     "start": "concurrently --kill-others \"npm run watch\" \"npm run serve\"",
     "watch": "webpack --watch --mode=development"
   },
-  "version": "0.1.2"
+  "version": "1.0.0"
 }
