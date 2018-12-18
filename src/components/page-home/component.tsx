@@ -4,7 +4,7 @@ import { Logo } from "../logo";
 export class Home extends React.Component {
   render() {
     return (
-      <div className="sci-sortier-documentation-home">
+      <div className="sci-sortier-documentation-page-home">
         <div className="logo">
           <Logo isAnimated={true} />
           <p className="tag-line">Stay sorted</p>

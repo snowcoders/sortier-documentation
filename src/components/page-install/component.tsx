@@ -4,7 +4,7 @@ import { CodeHighlighter } from "../code-highlighter";
 export class Install extends React.Component {
   render() {
     return (
-      <div className="sci-sortier-documentation-install">
+      <div className="sci-sortier-documentation-page-install">
         <h1>Install</h1>
         <p>
           We recommend pinning an exact version of Sortier in your package.json
@@ -13,19 +13,19 @@ export class Install extends React.Component {
         </p>
         <p>
           With{" "}
-          <CodeHighlighter isInline={true} source={"npm"} language="bash" />:
+          <CodeHighlighter isInline={true} language="bash" source={"npm"} />:
         </p>
         <CodeHighlighter
-          source={"npm install --save-dev --save-exact @snowcoders/sortier"}
           language="bash"
+          source={"npm install --save-dev --save-exact @snowcoders/sortier"}
         />
         <p>
-          Or <CodeHighlighter isInline={true} source={"yarn"} language="bash" />
+          Or <CodeHighlighter isInline={true} language="bash" source={"yarn"} />
           :
         </p>
         <CodeHighlighter
-          source={"yarn add prettier --dev --exact"}
           language="bash"
+          source={"yarn add prettier --dev --exact"}
         />
         <h2>Pre-commit hook</h2>
         <p>
@@ -37,11 +37,11 @@ export class Install extends React.Component {
           with it. If not, this repository uses{" "}
           <CodeHighlighter
             isInline={true}
-            source={"lint-staged"}
             language="bash"
+            source={"lint-staged"}
           />{" "}
           and{" "}
-          <CodeHighlighter isInline={true} source={"husky"} language="bash" />.
+          <CodeHighlighter isInline={true} language="bash" source={"husky"} />.
         </p>
         <ol>
           <li>
@@ -49,8 +49,8 @@ export class Install extends React.Component {
               Run{" "}
               <CodeHighlighter
                 isInline={true}
-                source={"npm install --save-dev lint-staged husky"}
                 language="bash"
+                source={"npm install --save-dev lint-staged husky"}
               />
             </p>
           </li>
@@ -59,12 +59,13 @@ export class Install extends React.Component {
               Create a{" "}
               <CodeHighlighter
                 isInline={true}
-                source={".huskyrc.json"}
                 language="bash"
+                source={".huskyrc.json"}
               />{" "}
               file with the contents
             </p>
             <CodeHighlighter
+              language="ts"
               source={`
 {
   "hooks": {
@@ -72,7 +73,6 @@ export class Install extends React.Component {
   }
 }
 `}
-              language="ts"
             />
           </li>
           <li>
@@ -80,12 +80,13 @@ export class Install extends React.Component {
               Create a{" "}
               <CodeHighlighter
                 isInline={true}
-                source={".lintstagedrc.json"}
                 language="bash"
+                source={".lintstagedrc.json"}
               />{" "}
               file with the contents
             </p>
             <CodeHighlighter
+              language="ts"
               source={`
 {
   "linters": {
@@ -98,7 +99,6 @@ export class Install extends React.Component {
   "ignore": ["**/package-lock.json"]
 }
 `}
-              language="ts"
             />
           </li>
         </ol>

@@ -4,7 +4,7 @@ import { CodeHighlighter } from "../code-highlighter";
 export class About extends React.Component {
   render() {
     return (
-      <div className="sci-sortier-documentation-about">
+      <div className="sci-sortier-documentation-page-about">
         <h1>About</h1>
         <h2>What is Sortier?</h2>
         <p>Sortier is a code sorting tool with support for:</p>

@@ -17,7 +17,7 @@ import { CodeHighlighter } from "../code-highlighter";
 export class OptionsJs extends React.Component {
   render() {
     return (
-      <div className="sci-sortier-documentation-options-js">
+      <div className="sci-sortier-documentation-page-options-js">
         <h1>Javascript options</h1>
         <h2>parser (Default: undefined)</h2>
         <p>The default parser to use of which there are three options</p>

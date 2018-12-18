@@ -4,7 +4,7 @@ import { CodeHighlighter } from "../code-highlighter";
 export class OptionsGeneral extends React.Component {
   render() {
     return (
-      <div className="sci-sortier-documentation-options-general">
+      <div className="sci-sortier-documentation-page-options-general">
         <h1>General options</h1>
         <h2>logLevel (Default: "normal")</h2>
         <p>

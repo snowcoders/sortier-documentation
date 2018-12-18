@@ -23,7 +23,7 @@ export class Playground extends React.Component<
     let { original, rewritten } = this.state;
 
     return (
-      <div className="sci-sortier-documentation-playground">
+      <div className="sci-sortier-documentation-page-playground">
         <div className="actions">
           <button onClick={this.runSortier}>Run</button>
         </div>

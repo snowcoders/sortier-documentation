@@ -3,7 +3,7 @@ import * as React from "react";
 export class Configuration extends React.Component {
   render() {
     return (
-      <div className="sci-sortier-documentation-configuration">
+      <div className="sci-sortier-documentation-page-configuration">
         <h1>Configuration</h1>
         <p>
           <span>Sortier uses </span>
