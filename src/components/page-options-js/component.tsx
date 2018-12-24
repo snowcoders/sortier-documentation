@@ -137,18 +137,23 @@ interface CustomReactProps {
         />
         <h2>sortClassContents (Default: undefined)</h2>
         <p>
+          WARNING: In beta - More test cases are required. Please try this out
+          yourself and provide feedback, the more we get, the better the
+          feature!
+        </p>
+        <p>
           Sorts all class content by groupings (static, constructor, properties
           then functions) then by access modifiers (public, protected, private)
         </p>
-        <p>By default this feature is turned off for a few reasons:</p>
-        <ul>
-          <li>
-            It sorts ignoring blank lines which goes against our initial
-            documentation
-          </li>
-          <li>We're still beta testing the whole thing</li>
-          <li>But mainly that first reason</li>
-        </ul>
+        <p>
+          By default this feature is turned off because it sorts through blank
+          lines which goes against our initial documentation
+        </p>
+        <p>
+          Static properties are always sorted by usage and then the provided
+          order. This is because static properties run on load and changing the
+          ordering of the dependencies may cause runtime changes.
+        </p>
         <p>The options available are</p>
         <ul>
           <li>
