@@ -3,7 +3,7 @@
   "description": "Documentation site for Sortier",
   "devDependencies": {
     "@snowcoders/renovate-config": "0.2.1",
-    "@snowcoders/sortier": "2.3.2",
+    "@snowcoders/sortier": "2.5.0",
     "@types/classnames": "2.2.6",
     "@types/highlight.js": "9.12.3",
     "@types/node": "10.12.18",
