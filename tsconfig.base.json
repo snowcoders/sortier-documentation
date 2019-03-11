@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "jsx": "react",
-    "module": "es6",
+    "module": "esnext",
     "moduleResolution": "node",
     "noImplicitAny": true,
     "noImplicitReturns": true,
@@ -9,7 +9,7 @@
     "noUnusedLocals": true,
     "outDir": "./dist/",
     "sourceMap": true,
-    "target": "es2015"
+    "target": "esnext"
   },
   "exclude": ["./src/**/*.test.ts", "./src/**/*.test.tsx"],
   "extends": "@snowcoders/renovate-config",
