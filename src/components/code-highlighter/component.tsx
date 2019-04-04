@@ -12,6 +12,11 @@ export interface ICodeHighlighterProps {
 export class CodeHighlighter extends React.Component<ICodeHighlighterProps> {
   private ref: null | HTMLElement;
 
+  constructor(props: ICodeHighlighterProps) {
+    super(props);
+    this.ref = null;
+  }
+
   componentDidMount() {
     if (this.ref != null) {
       highlightBlock(this.ref);
