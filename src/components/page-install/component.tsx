@@ -25,7 +25,7 @@ export class Install extends React.Component {
         </p>
         <CodeHighlighter
           language="bash"
-          source={"yarn add prettier --dev --exact"}
+          source={"yarn add @snowcoders/sortier --dev --exact"}
         />
         <h2>Pre-commit hook</h2>
         <p>
