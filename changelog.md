@@ -1,5 +1,9 @@
 ### Unreleased
 
+### 1.0.3
+
+- Fixed install instructions (Thanks dregimbal)
+
 ### 1.0.2
 
 - Moved back to CDNs and added highlight.js from a CDN
