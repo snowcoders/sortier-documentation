@@ -15,7 +15,7 @@
     "classnames": "2.2.6",
     "concurrently": "4.1.2",
     "copyfiles": "2.1.1",
-    "cross-env": "5.2.0",
+    "cross-env": "5.2.1",
     "css-loader": "3.2.0",
     "highlight.js": "9.15.10",
     "husky": "3.0.4",
