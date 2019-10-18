@@ -10,7 +10,7 @@
     "@types/react-dom": "16.9.2",
     "@types/react-router-dom": "5.1.0",
     "@types/react-router-hash-link": "1.2.1",
-    "@types/webpack": "4.39.2",
+    "@types/webpack": "4.39.3",
     "acorn": "7.1.0",
     "classnames": "2.2.6",
     "concurrently": "4.1.2",
@@ -36,7 +36,7 @@
     "tsconfig-paths": "3.9.0",
     "tslib": "1.10.0",
     "typescript": "3.6.4",
-    "webpack": "4.41.0",
+    "webpack": "4.41.2",
     "webpack-cli": "3.3.9"
   },
   "license": "MIT",
