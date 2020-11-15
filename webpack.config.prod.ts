@@ -5,7 +5,7 @@ const config: webpack.Configuration = {
   ...webpackBase,
   devtool: false,
   mode: "production",
-  ...generateModuleList("tsconfig.prod.json")
+  ...generateModuleList("tsconfig.prod.json"),
 };
 
 export default config;

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 interface PlaygroundProps {}
 
@@ -16,7 +16,7 @@ export class Playground extends React.Component<
 
     this.state = {
       original: "",
-      rewritten: ""
+      rewritten: "",
     };
   }
   render() {
@@ -41,14 +41,14 @@ export class Playground extends React.Component<
 
   onOriginalChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     this.setState({
-      original: event.currentTarget.value
+      original: event.currentTarget.value,
     });
   };
 
   runSortier = () => {
     let { original } = this.state;
     this.setState({
-      rewritten: original
+      rewritten: original,
     });
   };
 }

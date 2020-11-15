@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 export class OptionsHtml extends React.Component {
   render() {

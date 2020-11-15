@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 import { HashRouter, Link, Route, Switch } from "react-router-dom";
 
@@ -19,7 +19,7 @@ export interface IAppProps {}
 
 export interface IAppState {}
 
-type LinkNode = LinkFolder | LinkConfig;
+type LinkNode = LinkConfig | LinkFolder;
 
 interface LinkFolder {
   children: LinkNode[];
@@ -38,68 +38,68 @@ export class App extends React.Component<IAppProps, IAppState> {
       {
         component: Home,
         name: "Home",
-        url: "/"
+        url: "/",
       },
       {
         children: [
           {
             component: About,
             name: "About",
-            url: "/about"
+            url: "/about",
           },
           {
             component: Philosophy,
             name: "Philosophy",
-            url: "/philosophy"
-          }
+            url: "/philosophy",
+          },
         ],
-        name: "Background"
+        name: "Background",
       },
       {
         children: [
           {
             component: Install,
             name: "Install",
-            url: "/install"
+            url: "/install",
           },
           {
             component: Running,
             name: "Running",
-            url: "/running"
+            url: "/running",
           },
           {
             component: Configuration,
             name: "Configuration",
-            url: "/configuration"
-          }
+            url: "/configuration",
+          },
         ],
-        name: "Usage"
+        name: "Usage",
       },
       {
         component: OptionsGeneral,
         name: "Options - General",
-        url: "/options-general"
+        url: "/options-general",
       },
       {
         component: OptionsCss,
         name: "Options - Css",
-        url: "/options-css"
+        url: "/options-css",
       },
       {
         component: OptionsHtml,
         name: "Options - Html",
-        url: "/options-html"
+        url: "/options-html",
       },
       {
         component: OptionsJs,
         name: "Options - Javascript",
-        url: "/options-js"
+        url: "/options-js",
       },
       {
         component: OptionsJson,
         name: "Options - Json",
-        url: "/options-json"
-      }
+        url: "/options-json",
+      },
     ];
 
     return (
@@ -156,7 +156,7 @@ export class App extends React.Component<IAppProps, IAppState> {
   private renderNavTree(nodes: LinkNode[]) {
     return (
       <ul>
-        {nodes.map(value => {
+        {nodes.map((value) => {
           let link = value as LinkConfig;
           let folder = value as LinkFolder;
           if (link.component != null) {
