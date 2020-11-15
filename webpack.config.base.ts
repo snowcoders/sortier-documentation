@@ -1,8 +1,8 @@
-import * as webpack from "webpack";
+import webpack from "webpack";
 
 const config: webpack.Configuration = {
   entry: {
-    main: "./src/index.tsx"
+    main: "./src/index.tsx",
   },
   // When importing a module whose path matches one of the following, just
   // assume a corresponding global variable exists and use that instead.
@@ -10,19 +10,19 @@ const config: webpack.Configuration = {
   // dependencies, which allows browsers to cache those libraries between builds.
   externals: {
     "highlight.js": "hljs",
+    react: "React",
     "react-dom": "ReactDOM",
-    react: "React"
   },
   output: {
     chunkFilename: "[name].js",
     filename: "[name].js",
     path: __dirname + "/dist",
-    publicPath: "/dist/"
+    publicPath: "/dist/",
   },
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: [".ts", ".tsx", ".js", ".json", ".html", ".js.mem"]
-  }
+    extensions: [".ts", ".tsx", ".js", ".json", ".html", ".js.mem"],
+  },
 };
 
 export const generateModuleList = (tsConfigFileName: string) => {
@@ -35,9 +35,9 @@ export const generateModuleList = (tsConfigFileName: string) => {
           use: {
             loader: "ts-loader",
             options: {
-              configFile: tsConfigFileName
-            }
-          }
+              configFile: tsConfigFileName,
+            },
+          },
         },
 
         // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
@@ -48,18 +48,18 @@ export const generateModuleList = (tsConfigFileName: string) => {
           test: /\.s?css$/,
           use: [
             {
-              loader: "style-loader" // creates style nodes from JS strings
+              loader: "style-loader", // creates style nodes from JS strings
             },
             {
-              loader: "css-loader" // translates CSS into CommonJS
+              loader: "css-loader", // translates CSS into CommonJS
             },
             {
-              loader: "sass-loader" // compiles Sass to CSS
-            }
-          ]
-        }
-      ]
-    }
+              loader: "sass-loader", // compiles Sass to CSS
+            },
+          ],
+        },
+      ],
+    },
   };
   return moduleList;
 };

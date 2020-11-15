@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 export interface LogoProps {
   isAnimated: boolean;
@@ -32,63 +32,63 @@ export class Logo extends React.Component<LogoProps, LogoState> {
         ...this.generateBackgroundColors(38, true),
         {
           className: "fore",
-          length: 14
+          length: 14,
         },
-        ...this.generateBackgroundColors(38, false)
+        ...this.generateBackgroundColors(38, false),
       ],
       [
         ...this.generateBackgroundColors(31, true),
         {
           className: "fore",
-          length: 28
+          length: 28,
         },
-        ...this.generateBackgroundColors(31, false)
+        ...this.generateBackgroundColors(31, false),
       ],
       [
         ...this.generateBackgroundColors(28, true),
         {
           className: "fore",
-          length: 12
+          length: 12,
         },
         ...this.generateBackgroundColors(14, null),
         {
           className: "fore",
-          length: 8
+          length: 8,
         },
-        ...this.generateBackgroundColors(28, false)
+        ...this.generateBackgroundColors(28, false),
       ],
       [
         ...this.generateBackgroundColors(26, true),
         {
           className: "fore",
-          length: 10
+          length: 10,
         },
-        ...this.generateBackgroundColors(54, false)
+        ...this.generateBackgroundColors(54, false),
       ],
       [
         ...this.generateBackgroundColors(26, true),
         {
           className: "fore",
-          length: 10
+          length: 10,
         },
-        ...this.generateBackgroundColors(54, false)
+        ...this.generateBackgroundColors(54, false),
       ],
       [
         ...this.generateBackgroundColors(28, true),
         {
           className: "fore",
-          length: 11
+          length: 11,
         },
-        ...this.generateBackgroundColors(51, false)
+        ...this.generateBackgroundColors(51, false),
       ],
       [
         ...this.generateBackgroundColors(32, true),
         {
           className: "fore",
-          length: 15
+          length: 15,
         },
-        ...this.generateBackgroundColors(43, false)
-      ]
+        ...this.generateBackgroundColors(43, false),
+      ],
     ];
 
     let middleLineLengths: Segment[][] = [
@@ -96,10 +96,10 @@ export class Logo extends React.Component<LogoProps, LogoState> {
         ...this.generateBackgroundColors(37, true),
         {
           className: "fore",
-          length: 16
+          length: 16,
         },
-        ...this.generateBackgroundColors(37, false)
-      ]
+        ...this.generateBackgroundColors(37, false),
+      ],
     ];
     let endHalfLineLengths: Segment[][] = [];
     for (let startLineLength of beginningHalfLineLengths) {
@@ -111,20 +111,20 @@ export class Logo extends React.Component<LogoProps, LogoState> {
     let lines = [
       ...beginningHalfLineLengths,
       ...middleLineLengths,
-      ...endHalfLineLengths
+      ...endHalfLineLengths,
     ].map((value, index) => {
       return {
         index: index,
-        segments: value
+        segments: value,
       };
     });
 
     if (props.isAnimated) {
       lines.sort((a, b) => {
-        let aFore = a.segments.find(segment => {
+        let aFore = a.segments.find((segment) => {
           return segment.className.localeCompare("fore") === 0;
         }) || { length: 0 };
-        let bFore = b.segments.find(segment => {
+        let bFore = b.segments.find((segment) => {
           return segment.className.localeCompare("fore") === 0;
         }) || { length: 0 };
         return bFore.length - aFore.length;
@@ -133,14 +133,14 @@ export class Logo extends React.Component<LogoProps, LogoState> {
 
     this.state = {
       isSorted: !props.isAnimated,
-      lines: lines
+      lines: lines,
     };
   }
 
   componentDidMount() {
     setTimeout(() => {
       this.setState({
-        isSorted: true
+        isSorted: true,
       });
     }, 3000);
   }
@@ -152,8 +152,8 @@ export class Logo extends React.Component<LogoProps, LogoState> {
     return (
       <svg
         className="sci-sortier-documentation-logo"
-        onMouseLeave={this.mouseLeave}
         onMouseEnter={this.mouseEnter}
+        onMouseLeave={this.mouseLeave}
         viewBox={`0 0 90 ${totalHeight}`}
       >
         {lines.map((value, index) => {
@@ -169,11 +169,11 @@ export class Logo extends React.Component<LogoProps, LogoState> {
   ): Segment[] {
     let colors: Segment[] = [];
     let nextLength = this.getNextLength(length);
-    let lastColor: SegmentClassNameOption | undefined = undefined;
+    let lastColor: undefined | SegmentClassNameOption = undefined;
     if (isStart != null) {
       colors.push({
         className: "clear",
-        length: nextLength
+        length: nextLength,
       });
       length = length - nextLength;
     }
@@ -184,7 +184,7 @@ export class Logo extends React.Component<LogoProps, LogoState> {
 
       colors.push({
         className: lastColor,
-        length: nextLength
+        length: nextLength,
       });
 
       length = length - nextLength;
@@ -208,7 +208,7 @@ export class Logo extends React.Component<LogoProps, LogoState> {
     let number = 0;
     let color = lastColor;
     do {
-      number = Math.random() * 3;
+      number = 3 * Math.random();
       if (number < 1) {
         color = "back-1";
       } else if (number < 2) {
@@ -222,13 +222,13 @@ export class Logo extends React.Component<LogoProps, LogoState> {
 
   private mouseEnter = () => {
     this.setState({
-      isSorted: false
+      isSorted: false,
     });
   };
 
   private mouseLeave = () => {
     this.setState({
-      isSorted: true
+      isSorted: true,
     });
   };
 
@@ -245,8 +245,9 @@ export class Logo extends React.Component<LogoProps, LogoState> {
         path = (
           <path
             className={segment.className}
-            d={`M${start + Logo.SPACE_BETWEEN_SEGMENTS} 0 l${segment.length -
-              Logo.SPACE_BETWEEN_SEGMENTS} 0`}
+            d={`M${start + Logo.SPACE_BETWEEN_SEGMENTS} 0 l${
+              segment.length - Logo.SPACE_BETWEEN_SEGMENTS
+            } 0`}
             key={index}
           />
         );

@@ -6,7 +6,7 @@ const config: webpack.Configuration = {
   devtool: "source-map",
   mode: "development",
   ...generateModuleList("tsconfig.dev.json"),
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 };
 
 export default config;

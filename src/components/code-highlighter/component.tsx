@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 import { highlightBlock } from "highlight.js";
 import "highlight.js/styles/atom-one-light.css";
@@ -29,11 +29,11 @@ export class CodeHighlighter extends React.Component<ICodeHighlighterProps> {
       return (
         <code
           className={language}
-          ref={ref => {
+          ref={(ref) => {
             this.ref = ref;
           }}
           style={{
-            display: "inline"
+            display: "inline",
           }}
         >
           {source.trim()}
@@ -43,7 +43,7 @@ export class CodeHighlighter extends React.Component<ICodeHighlighterProps> {
     return (
       <pre
         className={language}
-        ref={ref => {
+        ref={(ref) => {
           this.ref = ref;
         }}
       >
