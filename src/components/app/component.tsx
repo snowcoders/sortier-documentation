@@ -5,6 +5,7 @@ import { HashRouter, Link, Route, Switch } from "react-router-dom";
 import { About } from "../page-about";
 import { Configuration } from "../page-configuration";
 import { Home } from "../page-home";
+import { Ignore } from "../page-ignore";
 import { Install } from "../page-install";
 import { OptionsCss } from "../page-options-css";
 import { OptionsGeneral } from "../page-options-general";
@@ -72,33 +73,43 @@ export class App extends React.Component<IAppProps, IAppState> {
             name: "Configuration",
             url: "/configuration",
           },
+          {
+            component: Ignore,
+            name: "Ignoring nodes",
+            url: "/ignore",
+          },
         ],
         name: "Usage",
       },
       {
-        component: OptionsGeneral,
-        name: "Options - General",
-        url: "/options-general",
-      },
-      {
-        component: OptionsCss,
-        name: "Options - Css",
-        url: "/options-css",
-      },
-      {
-        component: OptionsHtml,
-        name: "Options - Html",
-        url: "/options-html",
-      },
-      {
-        component: OptionsJs,
-        name: "Options - Javascript",
-        url: "/options-js",
-      },
-      {
-        component: OptionsJson,
-        name: "Options - Json",
-        url: "/options-json",
+        children: [
+          {
+            component: OptionsGeneral,
+            name: "General",
+            url: "/options-general",
+          },
+          {
+            component: OptionsCss,
+            name: "Css",
+            url: "/options-css",
+          },
+          {
+            component: OptionsHtml,
+            name: "Html",
+            url: "/options-html",
+          },
+          {
+            component: OptionsJs,
+            name: "Javascript",
+            url: "/options-js",
+          },
+          {
+            component: OptionsJson,
+            name: "Json",
+            url: "/options-json",
+          },
+        ],
+        name: "Options",
       },
     ];
 

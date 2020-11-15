@@ -32,7 +32,7 @@ export class OptionsGeneral extends React.Component {
 }`}
           />
         </p>
-        <h2>isTestMode (Default: false)</h2>
+        <h2>isTestRun (Default: false)</h2>
         <p>
           When false, sortier will rewrite existing files in place. When true,
           the files will not be rewritten but sortier will run.
@@ -43,7 +43,7 @@ export class OptionsGeneral extends React.Component {
             language={"js"}
             source={`
 {
-  "isTestMode": false 
+  "isTestRun": false 
 }`}
           />
         </p>
