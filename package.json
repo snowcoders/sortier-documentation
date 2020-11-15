@@ -54,5 +54,5 @@
     "version": "changelog-updater && git add .",
     "watch": "cross-env TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack --watch --config=\"webpack.config.dev.ts\""
   },
-  "version": "1.0.3"
+  "version": "1.0.4"
 }
