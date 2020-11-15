@@ -1,5 +1,7 @@
 ### [Unreleased]
 
+## [1.0.4] - 2020-11-15
+
 - Added documentation for `sortier-ignore-nodes` and `sortier-ignore-next-line`
 
 ### 1.0.3
