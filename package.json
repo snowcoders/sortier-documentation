@@ -33,7 +33,7 @@
     "source-map-loader": "3.0.0",
     "style-loader": "2.0.0",
     "ts-loader": "9.2.2",
-    "ts-node": "9.1.1",
+    "ts-node": "10.0.0",
     "tsconfig-paths": "3.9.0",
     "tslib": "2.2.0",
     "typescript": "4.2.4",
